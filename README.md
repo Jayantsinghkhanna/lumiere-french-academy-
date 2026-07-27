@@ -4,7 +4,7 @@
 
 ### A Modern Full-Stack Learning Platform for French Language Education
 
-<img src="assets/logo.png" width="170"/>
+<img src="logo.png" width="170"/>
 
 <p>
 <b>React • TypeScript • FastAPI • REST API • Authentication • Docker</b>
@@ -53,7 +53,7 @@ This repository serves as a **public showcase** of the application's development
 
 The homepage introduces the academy with a clean and premium design, highlighting courses, achievements, daily French phrases, and quick access to registrations.
 
-![](assets/home.png)
+![](home.png)
 
 ---
 
@@ -61,7 +61,7 @@ The homepage introduces the academy with a clean and premium design, highlightin
 
 Browse available French programs with categorized learning paths, difficulty levels, course descriptions, and enrollment options.
 
-![](assets/courses.png)
+![](courses.png)
 
 ---
 
@@ -69,7 +69,7 @@ Browse available French programs with categorized learning paths, difficulty lev
 
 A fully functional inquiry and demo booking system allowing prospective students to connect directly with the academy.
 
-![](assets/contact.png)
+![](contact.png)
 
 ---
 
@@ -77,7 +77,7 @@ A fully functional inquiry and demo booking system allowing prospective students
 
 Secure login system supporting authenticated student access and protected application features.
 
-![](assets/register.png)
+![](register.png)
 
 ---
 
@@ -85,7 +85,7 @@ Secure login system supporting authenticated student access and protected applic
 
 A robust FastAPI backend exposing REST endpoints for authentication, enrollments, course management, student management, batch management, website content, and administrative operations.
 
-![](assets/api.png)
+![](api.png)
 
 ---
 
@@ -323,8 +323,6 @@ DELETE
 # 📁 Repository Structure
 
 ```
-assets/
-│
 ├── home.png
 ├── courses.png
 ├── contact.png
