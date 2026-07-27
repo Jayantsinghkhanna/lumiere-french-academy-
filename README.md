@@ -2,60 +2,272 @@
 
 # 🇫🇷 Lumière French Academy
 
-### Modern Full-Stack Website for a French Language Institute
+### A Modern Full-Stack Learning Platform for French Language Education
 
-*A production-oriented web platform built to simplify course registrations, student interactions, and academy management.*
+<img src="assets/logo.png" width="170"/>
 
-> 🚧 **Currently under active development**
+<p>
+<b>React • TypeScript • FastAPI • REST API • Authentication • Docker</b>
+</p>
 
-<img src="assets/banner.png" width="100%" />
+> Building a premium digital experience for French language learners.
+
+🚧 **Work in Progress — Continuously evolving with new features and improvements.**
 
 </div>
 
 ---
 
-## ✨ Overview
+# ✨ About The Project
 
-Lumière French Academy is a modern, responsive full-stack web application designed for a French language institute. The platform focuses on providing a seamless experience for prospective students while giving administrators an efficient way to manage registrations and academy operations.
+Lumière French Academy is a production-oriented full-stack web application developed for a modern French language institute.
 
-The project emphasizes clean UI, scalable backend architecture, responsive design, and a smooth user experience across desktop and mobile devices.
+The goal of this project is to provide a seamless experience for students, teachers, and administrators through an elegant frontend backed by a scalable REST API architecture.
+
+Unlike a simple educational website, this platform manages the complete student lifecycle—from discovering courses to enrollment, authentication, batch management, and administrative operations.
+
+This repository serves as a **public showcase** of the application's development journey. The source code remains private while screenshots, architecture, UI evolution, and feature progress are documented here.
 
 ---
 
-# 🖼️ Preview
+# 🌟 Highlights
 
-| Home | Courses |
-|------|---------|
-| ![](assets/home.png) | ![](assets/courses.png) |
+- 🎨 Modern responsive interface
+- 🔐 Complete authentication system
+- 📚 Dynamic course management
+- 📝 Student enrollment workflow
+- 👨‍🏫 Batch allocation system
+- 📞 Contact & lead management
+- 🛠️ Admin dashboard
+- 🌐 RESTful API backend
+- ⚡ FastAPI powered services
+- 🐳 Docker-ready architecture
+- 📱 Mobile responsive design
+- 🎯 Production-focused project structure
 
-| Registration | Contact |
-|------|---------|
-| ![](assets/register.png) | ![](assets/contact.png) |
+---
 
-| Mobile View | Admin Dashboard |
-|------|---------|
-| ![](assets/mobile.png) | ![](assets/admin.png) |
+# 📸 Application Preview
+
+## 🏠 Landing Page
+
+The homepage introduces the academy with a clean and premium design, highlighting courses, achievements, daily French phrases, and quick access to registrations.
+
+![](assets/home.png)
+
+---
+
+## 📖 Courses
+
+Browse available French programs with categorized learning paths, difficulty levels, course descriptions, and enrollment options.
+
+![](assets/courses.png)
+
+---
+
+## 📞 Contact & Demo Booking
+
+A fully functional inquiry and demo booking system allowing prospective students to connect directly with the academy.
+
+![](assets/contact.png)
+
+---
+
+## 🔐 Authentication
+
+Secure login system supporting authenticated student access and protected application features.
+
+![](assets/register.png)
+
+---
+
+## ⚙️ Backend API Documentation
+
+A robust FastAPI backend exposing REST endpoints for authentication, enrollments, course management, student management, batch management, website content, and administrative operations.
+
+![](assets/api.png)
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                React + TypeScript Frontend
+                          │
+                          │ REST API
+                          ▼
+                 FastAPI Backend Services
+                          │
+      ┌───────────────────┼────────────────────┐
+      │                   │                    │
+ Authentication      Course Engine      Contact Module
+      │                   │                    │
+      ├────────────── Enrollment System ───────┤
+      │                   │                    │
+ Batch Management    Student Portal     Admin Dashboard
+                          │
+                          ▼
+                       Database
+```
 
 ---
 
 # 🚀 Features
 
-- 🎨 Modern Responsive UI
-- 📱 Mobile Friendly Design
-- 📝 Student Registration
-- 📚 Course Information
-- 📞 Contact & Inquiry Forms
-- 🔒 Secure Backend APIs
-- ⚡ Fast Performance
-- 🌐 REST API Architecture
-- 🐳 Docker-ready Deployment
-- 📈 Scalable Project Structure
+## Student Side
+
+- Responsive landing page
+- Browse French courses
+- Student registration
+- Secure login
+- Book free demo
+- Contact academy
+- Course exploration
+- Personal dashboard
+- Enrollment management
 
 ---
 
-# 🏗️ Tech Stack
+## Admin Side
 
-### Frontend
+- Course CRUD
+- Student Management
+- Enrollment Approval
+- Batch Assignment
+- Website Content Management
+- Contact Requests
+- User Management
+- Batch Administration
+
+---
+
+## Backend
+
+- JWT Authentication
+- REST APIs
+- Request Validation
+- Protected Routes
+- Role-based Authorization
+- CRUD Operations
+- API Documentation (Swagger)
+- Modular Architecture
+
+---
+
+# 🧠 Backend Modules
+
+The backend is organized into multiple independent modules to ensure scalability and maintainability.
+
+### Authentication
+
+- User Registration
+- Secure Login
+- JWT Token Authentication
+- Protected Endpoints
+
+### Courses
+
+- Add Courses
+- Update Courses
+- Course Retrieval
+- Dynamic Course Pages
+
+### Enrollments
+
+- Student Enrollment
+- Approval Workflow
+- Rejection Workflow
+- Activation
+- Batch Assignment
+
+### Batch Management
+
+- Create Batch
+- Edit Batch
+- Delete Batch
+- Student Allocation
+
+### Student Management
+
+- Student Profiles
+- Activation
+- Suspension
+- Administrative Controls
+
+### Contact Management
+
+- Inquiry Submission
+- Lead Tracking
+- Admin Responses
+
+### Website CMS
+
+- Dynamic Website Content
+- Content Updates
+- API-driven Website Sections
+
+---
+
+# 📡 REST API
+
+The application exposes a production-style REST API built using FastAPI.
+
+### Authentication
+
+```
+POST /auth/register
+POST /auth/login
+```
+
+### Courses
+
+```
+GET    /courses
+GET    /courses/{slug}
+POST   /courses
+```
+
+### Enrollments
+
+```
+POST   /enrollments
+GET    /enrollments/me
+PATCH  /approve
+PATCH  /reject
+PATCH  /assign-batch
+```
+
+### Batches
+
+```
+GET
+POST
+PUT
+DELETE
+```
+
+### Students
+
+```
+GET
+PATCH
+DELETE
+```
+
+### Contact
+
+```
+POST
+GET
+PATCH
+DELETE
+```
+
+---
+
+# 💻 Technology Stack
+
+## Frontend
 
 - React
 - TypeScript
@@ -63,13 +275,15 @@ The project emphasizes clean UI, scalable backend architecture, responsive desig
 - Tailwind CSS
 - shadcn/ui
 
-### Backend
+## Backend
 
 - FastAPI
 - Python
+- Pydantic
+- JWT Authentication
 - REST APIs
 
-### Tools
+## Development
 
 - Docker
 - Git
@@ -77,76 +291,92 @@ The project emphasizes clean UI, scalable backend architecture, responsive desig
 
 ---
 
-# 📂 Project Status
+# ⚙️ Development Progress
 
-The project is currently under active development.
+## Completed
 
-### Completed
-
-- ✅ Landing Page
-- ✅ Responsive Navigation
-- ✅ Course Pages
-- ✅ Contact Page
-- ✅ Student Registration UI
+- ✅ Responsive Landing Page
+- ✅ Authentication System
+- ✅ Dynamic Course Module
+- ✅ Contact System
+- ✅ Enrollment Workflow
+- ✅ Batch Management
+- ✅ Student Management
+- ✅ REST API
+- ✅ Swagger Documentation
 - ✅ Frontend–Backend Integration
-- ✅ API Development
-- ✅ Docker Environment
+- ✅ Docker Development Setup
 
-### In Progress
+---
 
-- 🚧 Admin Dashboard
-- 🚧 Backend Optimization
-- 🚧 Authentication
+## Currently Working On
+
+- 🚧 Student Dashboard Enhancements
+- 🚧 Admin Dashboard UI
+- 🚧 Analytics
+- 🚧 Performance Optimization
+- 🚧 Security Improvements
 - 🚧 Production Deployment
-- 🚧 Performance Improvements
-- 🚧 Testing & Validation
-
-### Planned
-
-- 📊 Analytics Dashboard
-- 📧 Automated Notifications
-- 🌍 Multi-language Support
-- 🔐 Advanced Security
-- 📱 Progressive Web App
 
 ---
 
-# 📸 Development Gallery
+# 📁 Repository Structure
 
-This repository showcases the evolution of the project through screenshots and progress updates.
+```
+assets/
+│
+├── home.png
+├── courses.png
+├── contact.png
+├── register.png
+├── api.png
+└── logo.png
 
-As development continues, new UI improvements, feature implementations, and backend milestones will be documented here.
+README.md
+```
 
 ---
 
-# 🎯 Goals
+# 🎯 Design Philosophy
 
-- Build a production-ready educational platform
-- Deliver a seamless student registration experience
-- Create a scalable backend architecture
-- Maintain clean and reusable components
-- Follow modern software engineering practices
+The project focuses on creating an experience that is:
+
+- Clean
+- Responsive
+- Modern
+- Fast
+- Accessible
+- Scalable
+- Production Ready
+
+Every page is designed with simplicity, readability, and usability in mind while maintaining a premium visual identity inspired by modern SaaS platforms.
 
 ---
 
-# 📌 Repository Purpose
+# 🔒 About This Repository
 
-This repository serves as a public showcase of the ongoing development of **Lumière French Academy**.
+This repository is intended as a **public portfolio showcase**.
 
-To protect proprietary implementation details, the source code remains private while this repository highlights:
+To protect proprietary implementation details, the application source code is kept private.
 
-- UI/UX Progress
-- Feature Development
+Instead, this repository documents:
+
+- UI Development
+- Feature Progress
+- Backend Capabilities
+- API Design
 - Application Screenshots
-- Development Updates
-- Project Milestones
+- Architecture Overview
+- Development Journey
 
 ---
 
 <div align="center">
 
-### 🚧 Building something great, one commit at a time.
+## 🇫🇷 Merci beaucoup!
 
-⭐ Stay tuned for future updates.
+**Building the future of French language learning, one commit at a time.**
+
+⭐ If you enjoyed exploring this project, don't forget to leave a star!
 
 </div>
