@@ -1,195 +1,151 @@
 <div align="center">
 
-<img src="logo.png" width="150" alt="Lumière French Academy Logo"/>
+<img src="logo.png" width="130" alt="Lumière French Academy Logo"/>
 
 # 🇫🇷 Lumière French Academy
 
 ### A Full-Stack French Language Learning & Academy Management Platform
 
-<p>
-  <b>React • TypeScript • FastAPI • PostgreSQL • JWT • RBAC • REST API • Tailwind CSS • Docker</b>
-</p>
+**React · TypeScript · FastAPI · PostgreSQL · SQLAlchemy · JWT · RBAC · REST API · Tailwind CSS**
 
-> A production-oriented platform connecting a premium French-learning website with authentication, enrollment workflows, batch operations, student portals, administration, analytics, and a PostgreSQL-backed REST API.
+A full-stack platform that connects a polished French-learning website with student accounts, course enrollment, batch management, administrative operations, analytics, and a PostgreSQL-backed REST API.
+
+[![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=20232A)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict%20Typing-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![JWT](https://img.shields.io/badge/Auth-JWT%20%2B%20RBAC-6C4AB6)](#-authentication--role-based-access-control)
 
 </div>
 
 ---
 
-## ✨ What is Lumière?
+## 📌 Project at a glance
 
-**Lumière French Academy** is more than a marketing website. It is a complete digital platform designed around the real workflow of a language academy.
+**Lumière French Academy** is more than a marketing website: it supports the workflow of a language academy from course discovery to enrollment review, student onboarding, batch assignment, and ongoing learning.
 
-A learner can discover a course, submit an enrollment request, create an account, access a protected dashboard, view their batch and schedule, and join their live class. Administrators can manage courses, review enrollment requests, activate students, create batches, assign learners, manage contact requests, update website content, and view operational analytics.
+The platform is organized around four connected areas:
 
-The platform is built around four layers:
+- 🌐 **Public website** — Home, Courses, Why Us, Teacher, Testimonials, FAQs, and Contact.
+- 🎓 **Student portal** — Dashboard, enrolled course, batch, timetable, teacher, fee status, and profile.
+- 🛡️ **Teacher/Admin operations** — Course, enrollment, batch, student, contact, website-content, and analytics management.
+- ⚡ **Application backend** — FastAPI REST endpoints, JWT authentication, role-aware authorization, validation, and PostgreSQL persistence.
 
-- 🌐 **Public academy experience**
-- 🎓 **Student portal**
-- 🛡️ **Teacher/Admin operations**
-- ⚡ **FastAPI + PostgreSQL application backend**
+## 🏗️ System architecture
+
+The architecture diagram below shows how the browser-based application, API backend, authentication and domain logic, and relational database work together.
+
+<div align="center">
+  <img src="Lumiere_French_Academy_Architecture_Final.png" alt="Lumière French Academy full-stack architecture diagram" width="100%"/>
+  <p><em>End-to-end architecture: public website and protected portals → FastAPI REST API → PostgreSQL through the ORM layer.</em></p>
+</div>
+
+### Architecture explained
+
+| Layer | Responsibility |
+|---|---|
+| **React + TypeScript frontend** | Renders public pages and protected student/teacher/admin experiences; calls backend APIs over HTTPS using JSON. |
+| **Authentication & authorization** | Handles registration and login, validates JWTs, and applies role-based access rules to protected operations. |
+| **FastAPI domain modules** | Implements application endpoints and workflows for users, courses, enrollments, batches, students, contacts, and website content. |
+| **Pydantic schemas** | Validates incoming request data and shapes API responses. |
+| **SQLAlchemy ORM** | Maps application models and database operations to relational persistence. |
+| **PostgreSQL** | Stores accounts, courses, enrollment state, batch information, contact requests, testimonials, and website content. |
+
+**Request path:** Frontend → HTTPS/JSON REST API → authentication/authorization and validation → domain logic → SQLAlchemy → PostgreSQL. The response returns through the API to the frontend.
 
 ---
 
-# 🚀 Core Capabilities
+## ✨ Core capabilities
 
 | Area | Capabilities |
 |---|---|
-| 🌐 Public Website | Landing page, courses, why us, teacher profile, testimonials, FAQs, contact |
+| 🌐 Public website | Landing page, courses, Why Us, teacher profile, testimonials, FAQs, and contact |
 | 🔐 Authentication | Registration, login, JWT authentication, protected routes |
-| 🧑‍🎓 Student Portal | Overview, course, batch, schedule, teacher, profile, fee status |
-| 📝 Enrollment | Enrollment requests, approval, rejection, activation, batch assignment |
-| 👨‍🏫 Batch Management | Create, edit, delete, schedule, capacity, teacher, meeting link, student assignment |
-| 📚 Course Management | Create, edit, delete and manage academy courses |
-| 👥 Student Management | Student listing, details, activation, suspension and deletion |
-| 📞 Contact Management | Website enquiries, contact records and admin handling |
-| 📊 Analytics | Enrollment growth, admission funnel, active students, revenue and courses |
-| 🧩 Website CMS | API-driven website content with protected admin editing |
-| 🔌 REST API | Swagger/OpenAPI documented backend with protected administrative endpoints |
+| 🧑‍🎓 Student portal | Overview, course, batch, schedule, teacher, profile, and fee status |
+| 📝 Enrollment | Enrollment requests, review, approval/rejection, activation, and batch assignment |
+| 👨‍🏫 Batch management | Create/edit/delete batches, schedules, capacity, teacher, meeting link, and student assignment |
+| 📚 Course management | Create, edit, delete, and manage academy courses |
+| 👥 Student management | Student listing/details, activation, suspension, and deletion |
+| 📞 Contact management | Website enquiries and admin-side handling |
+| 📊 Analytics | Enrollment growth, admission funnel, active students, revenue, and courses |
+| 🧩 Website content | API-driven website content with protected administrative editing |
+| 🔌 REST API | FastAPI endpoints documented through OpenAPI/Swagger |
 
 ---
 
-# 🏗️ Architecture
+## 🔄 Enrollment lifecycle
+
+The enrollment workflow connects the public course catalogue to the academy's day-to-day operations.
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│                    Lumière Web Application                  │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Public Website                    Protected Application      │
-│  ───────────────                   ─────────────────────     │
-│  Home                             Student Portal             │
-│  Courses                          Teacher/Admin Portal        │
-│  Why Us                           Analytics                   │
-│  Teacher                          Batch Management            │
-│  Testimonials                     Course Management           │
-│  FAQs                             Enrollment Management       │
-│  Contact                          Student Management          │
-│                                                              │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               │ HTTPS / JSON REST
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                        FastAPI Backend                       │
-├──────────────────────────────────────────────────────────────┤
-│  Authentication / Authorization                              │
-│  ├── Register / Login                                        │
-│  ├── JWT validation                                          │
-│  └── Role-based access control                               │
-│                                                              │
-│  Domain Modules                                               │
-│  ├── Users                                                    │
-│  ├── Courses                                                  │
-│  ├── Enrollments                                              │
-│  ├── Batches                                                  │
-│  ├── Students                                                 │
-│  ├── Contacts                                                 │
-│  └── Website Content                                          │
-│                                                              │
-│  Validation + Serialization                                  │
-│  └── Pydantic request/response schemas                        │
-└──────────────────────────────┬───────────────────────────────┘
-                               │
-                               │ SQL / ORM layer
-                               ▼
-┌──────────────────────────────────────────────────────────────┐
-│                         PostgreSQL                            │
-├──────────────────────────────────────────────────────────────┤
-│  users • courses • enrollments • batches • contacts         │
-│  testimonials • website_content                              │
-└──────────────────────────────────────────────────────────────┘
+Visitor discovers a course
+          │
+          ▼
+Submits enrollment request
+          │
+          ▼
+Admin reviews the request
+          │
+     ┌────┴─────┐
+     ▼          ▼
+   Reject     Approve
+                 │
+                 ▼
+        Activate / assign batch
+                 │
+                 ▼
+          Student portal
+                 │
+                 ▼
+       Schedule + teacher details
+                 │
+                 ▼
+            Join live class
 ```
 
----
-
-# 🔐 Authentication & RBAC
-
-Lumière uses **role-aware access control** so the public website, learner experience, and administrative operations have different access boundaries.
-
-### 👤 Student
-
-Students can access their own learner experience:
-
-- View personal dashboard
-- View enrolled course
-- View assigned batch
-- View teacher and timetable
-- Access the live class link
-- Check fee status
-- Manage profile information
-- Contact the academy
-
-### 🧑‍💼 Teacher / Admin
-
-Administrative users can access operational tools:
-
-- Course CRUD
-- Enrollment review
-- Approve / reject requests
-- Activate learners
-- Assign students to batches
-- Create and manage batches
-- Manage students
-- Manage contact requests
-- Update website content
-- View analytics
-
-### 🔒 API-level authorization
-
-Sensitive actions are protected at the backend layer rather than relying only on frontend visibility. This keeps administrative operations behind authenticated and authorized API routes.
+This is an **approval-based enrollment workflow**. Online payment gateway integration is listed as a future enhancement, not as a currently implemented payment flow.
 
 ---
 
-# 🔄 Enrollment Lifecycle
+## 🔐 Authentication & role-based access control
 
-```text
-Visitor
-   │
-   ▼
-Explore Course
-   │
-   ▼
-Submit Enrollment Request
-   │
-   ▼
-Admin Review
-   ├───────────────┐
-   │               │
-Reject           Approve
-   │               │
-   ▼               ▼
-Closed       Activate / Assign
-                  │
-                  ▼
-             Student Portal
-                  │
-                  ▼
-             Batch Assignment
-                  │
-                  ▼
-          Schedule + Teacher
-                  │
-                  ▼
-             Join Live Class
-```
+The application separates public browsing from protected learner and administrative operations.
 
-This models an actual academy admission workflow instead of treating enrollment as a standalone form.
+### 👤 Student experience
+
+- View personal dashboard and enrolled course.
+- View assigned batch, teacher, and timetable.
+- Access the live class link.
+- Check fee status and manage profile information.
+- Contact the academy.
+
+### 🧑‍💼 Teacher/Admin operations
+
+- Manage courses.
+- Review enrollment requests and approve/reject them.
+- Activate students and assign them to batches.
+- Create and manage batches.
+- Manage student records and contact requests.
+- Update website content and view analytics.
+
+### 🔒 API-level security
+
+Sensitive operations are protected at the backend rather than relying only on frontend visibility. Security-oriented features include password hashing, JWT authentication, role-aware authorization, Pydantic validation, protected API routes, and backend-side permission checks.
 
 ---
 
-# 📡 API Overview
+## 📡 API overview
 
-The FastAPI backend exposes an OpenAPI/Swagger-documented REST surface.
+The FastAPI backend exposes an OpenAPI/Swagger-documented REST API. The following routes represent the documented application surface.
 
-## Authentication
+### Authentication
 
 ```http
 POST /auth/register
 POST /auth/login
 ```
 
-## Courses
+### Courses
 
 ```http
 GET  /courses
@@ -197,13 +153,13 @@ POST /courses
 GET  /courses/{slug}
 ```
 
-## Current User
+### Current user
 
 ```http
 GET /users/me
 ```
 
-## Enrollments
+### Enrollments
 
 ```http
 POST  /enrollments
@@ -217,7 +173,7 @@ PATCH /enrollments/admin/{enrollment_id}/activate
 PATCH /enrollments/admin/{enrollment_id}/assign-batch
 ```
 
-## Batches
+### Batches
 
 ```http
 GET    /batches
@@ -228,7 +184,7 @@ PUT    /batches/admin/{batch_id}
 DELETE /batches/admin/{batch_id}
 ```
 
-## Students
+### Students
 
 ```http
 GET    /admin/students
@@ -238,7 +194,7 @@ PATCH  /admin/students/{student_id}/activate
 PATCH  /admin/students/{student_id}/suspend
 ```
 
-## Contact
+### Contact
 
 ```http
 POST   /contact
@@ -248,7 +204,7 @@ PATCH  /admin/contact/{contact_id}
 DELETE /admin/contact/{contact_id}
 ```
 
-## Website Content
+### Website content
 
 ```http
 GET /website-content
@@ -257,29 +213,25 @@ PUT /admin/website-content
 
 ---
 
-# 🗄️ PostgreSQL Database
+## 🗄️ PostgreSQL data model
 
-The platform uses **PostgreSQL** for persistent relational application data.
+PostgreSQL stores persistent relational application data. The principal entities documented for the platform are:
 
-### Core entities
-
-| Table | Responsibility |
+| Table / entity | Responsibility |
 |---|---|
-| `users` | Accounts, identity and authentication data |
+| `users` | Accounts, identity, and authentication data |
 | `courses` | Course catalogue and course metadata |
 | `enrollments` | Admission and enrollment lifecycle |
-| `batches` | Class schedule, teacher, capacity and meeting information |
+| `batches` | Schedule, teacher, capacity, and meeting information |
 | `contact_requests` | Website leads and enquiries |
 | `testimonials` | Learner/parent testimonials |
-| `website_content` | Dynamic CMS-style website content |
+| `website_content` | Dynamic website content |
 
 ### Relationship overview
 
 ```text
 users
-  │
   └── enrollments ─── courses
-          │
           └────────── batches
 
 contact_requests
@@ -287,59 +239,54 @@ testimonials
 website_content
 ```
 
-The relational model allows the frontend dashboards and public website to consume live application data instead of depending on static page content.
+SQLAlchemy ORM provides the application-side mapping to the relational database.
 
 ---
 
-# 🧰 Technology Stack
+## 🧰 Technology stack
 
-## Frontend
+### Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Responsive UI and protected application routes
 
-- ⚛️ React
-- 🟦 TypeScript
-- ⚡ Vite
-- 🎨 Tailwind CSS
-- 🧩 shadcn/ui
-- 📊 Analytics visualizations
-- 🔐 Protected application routes
+### Backend
+- Python
+- FastAPI
+- Pydantic
+- JWT authentication
+- Role-based authorization
+- REST APIs
+- OpenAPI / Swagger
 
-## Backend
-
-- 🐍 Python
-- ⚡ FastAPI
-- ✅ Pydantic
-- 🔐 JWT authentication
-- 🛡️ Role-based authorization
-- 📡 REST APIs
-- 📘 OpenAPI / Swagger
-
-## Database
-
-- 🐘 PostgreSQL
-
-## Engineering
-
-- 🐳 Docker-ready setup
-- 🔧 Git
-- 🐙 GitHub
-- 🔌 REST-based frontend/backend integration
+### Database & engineering
+- PostgreSQL
+- SQLAlchemy ORM
+- Docker-ready setup
+- Git and GitHub
+- REST-based frontend/backend integration
 
 ---
 
-# 📸 Application Showcase
+# 📸 Application showcase
 
-## 🏠 Landing Page
+The screenshots below are retained so visitors can see the actual public website, student experience, administration tools, API documentation, and database view.
 
-### Light Mode
+## 🏠 Landing page
+
+### Light mode
 
 <p align="center">
-  <img src="Landing_Page_White.png" width="92%" alt="Lumière landing page light mode"/>
+  <img src="Landing_Page_White.png" width="92%" alt="Lumière landing page in light mode"/>
 </p>
 
-### Dark Mode
+### Dark mode
 
 <p align="center">
-  <img src="Landing_Page_Dark.png" width="92%" alt="Lumière landing page dark mode"/>
+  <img src="Landing_Page_Dark.png" width="92%" alt="Lumière landing page in dark mode"/>
 </p>
 
 ---
@@ -350,9 +297,7 @@ The relational model allows the frontend dashboards and public website to consum
   <img src="Courses_Page.png" width="92%" alt="Lumière courses page"/>
 </p>
 
-The catalogue presents learning paths across **School French, DELF Prim, DELF Junior and Adult DELF**, with course level, class frequency and learner-focused descriptions.
-
----
+The catalogue presents learning paths across **School French, DELF Prim, DELF Junior, and Adult DELF**, with course level, class frequency, and learner-focused descriptions.
 
 ## 💡 Why Lumière
 
@@ -360,15 +305,11 @@ The catalogue presents learning paths across **School French, DELF Prim, DELF Ju
   <img src="Why_Us_Page.png" width="92%" alt="Why Lumière page"/>
 </p>
 
----
-
-## 👩‍🏫 Teacher Profile
+## 👩‍🏫 Teacher profile
 
 <p align="center">
   <img src="Teacher_Page.png" width="92%" alt="Lumière teacher page"/>
 </p>
-
----
 
 ## ⭐ Testimonials
 
@@ -376,81 +317,55 @@ The catalogue presents learning paths across **School French, DELF Prim, DELF Ju
   <img src="Testimonals_Page.png" width="92%" alt="Lumière testimonials page"/>
 </p>
 
----
-
 ## ❓ FAQs
 
 <p align="center">
   <img src="FAQs_Page.png" width="92%" alt="Lumière FAQs page"/>
 </p>
 
----
-
-## 📞 Contact & Demo Booking
+## 📞 Contact & demo booking
 
 <p align="center">
   <img src="Contact_Page.png" width="92%" alt="Lumière contact page"/>
 </p>
 
-Website enquiries are captured into the backend and can subsequently be handled from the admin console.
+Website enquiries are captured by the backend and can subsequently be handled from the admin console.
 
 ---
 
-# 🎓 Student Portal
+# 🎓 Student portal
 
-## Student Dashboard
+## Student dashboard
 
 <p align="center">
   <img src="Student_Dashboard.png" width="92%" alt="Lumière student dashboard"/>
 </p>
 
-The student experience brings together:
+The student experience brings together the current course, assigned batch, schedule, teacher, enrollment state, quick access to batch details, and academy contact.
 
-- Current course
-- Assigned batch
-- Schedule
-- Teacher
-- Enrollment state
-- Quick access to batch details
-- Academy contact
-
-## My Batch
+## My batch
 
 <p align="center">
   <img src="Student_MyBatch.png" width="92%" alt="Lumière student batch page"/>
 </p>
 
-Students can view:
-
-- Class days
-- Class time
-- Teacher
-- Batch strength
-- Start and end dates
-- Live class entry point
+Students can view class days and time, teacher, batch strength, start/end dates, and the live-class entry point.
 
 ---
 
-# 🛡️ Admin / Teacher Console
+# 🛡️ Admin / Teacher console
 
-The administration area is designed as the operational control center for the academy.
+The administration area is the operational control center for the academy.
 
-## Admin Dashboard
+## Admin dashboard
 
 <p align="center">
   <img src="Admin_Dashboard.png" width="92%" alt="Lumière admin dashboard"/>
 </p>
 
-It surfaces operational metrics including:
+It surfaces operational metrics including active students, pending requests, batches, monthly revenue, new enquiries, and awaiting payment.
 
-- Active students
-- Pending requests
-- Batches
-- Monthly revenue
-- New enquiries
-- Awaiting payment
-
-## Enrollment Requests
+## Enrollment requests
 
 <p align="center">
   <img src="Admin_Enrollments.png" width="92%" alt="Lumière admin enrollment requests"/>
@@ -458,25 +373,25 @@ It surfaces operational metrics including:
 
 Admins can review incoming requests and progress them through the admission lifecycle.
 
-## Course Management
+## Course management
 
 <p align="center">
   <img src="Admin_CourseManagement.png" width="92%" alt="Lumière admin course management"/>
 </p>
 
-## Batch Management
+## Batch management
 
 <p align="center">
   <img src="Admin_Batch.png" width="92%" alt="Lumière admin batch management"/>
 </p>
 
-## Create Batch
+## Create batch
 
 <p align="center">
   <img src="Admin_CreateBatch.png" width="92%" alt="Lumière create batch form"/>
 </p>
 
-Batch creation supports course, code, name, teacher, capacity, days, time, start/end dates and meeting-link details.
+Batch creation supports course, code, name, teacher, capacity, days, time, start/end dates, and meeting-link details.
 
 ## Analytics
 
@@ -484,15 +399,9 @@ Batch creation supports course, code, name, teacher, capacity, days, time, start
   <img src="Admin_Analytics.png" width="92%" alt="Lumière admin analytics"/>
 </p>
 
-The analytics workspace presents:
+The analytics workspace presents enrollment growth, admission funnel, active students, monthly revenue, and live courses.
 
-- Enrollment growth
-- Admission funnel
-- Active students
-- Monthly revenue
-- Courses live
-
-## Contact Requests
+## Contact requests
 
 <p align="center">
   <img src="Admin_Contact.png" width="92%" alt="Lumière admin contact requests"/>
@@ -500,75 +409,57 @@ The analytics workspace presents:
 
 ---
 
-# 📘 API Documentation
+## 📘 API documentation
 
 <p align="center">
   <img src="api.png" width="92%" alt="Lumière FastAPI Swagger API documentation"/>
 </p>
 
-The API documentation exposes the application contract for:
+The API documentation exposes the application surface for authentication, users, courses, enrollments, batches, students, contact requests, and website content, with structured request/response schemas through OpenAPI.
 
-- Authentication
-- Users
-- Courses
-- Enrollments
-- Batches
-- Students
-- Contact requests
-- Website content
-
-It also exposes structured request/response schemas through OpenAPI.
-
----
-
-# 🗄️ Database View
+## 🗄️ Database view
 
 <p align="center">
   <img src="PostgreSQL_Db.png" width="92%" alt="Lumière PostgreSQL database"/>
 </p>
 
-The database layer is the persistent foundation for the academy's user, course, enrollment, batch, contact, testimonial and website-content workflows.
+The database layer supports the academy's user, course, enrollment, batch, contact, testimonial, and website-content workflows.
 
 ---
 
-# 🔐 Security Model
+## 🔐 Security request flow
 
 ```text
-HTTP Request
+HTTP request
      │
      ▼
-JWT Authentication
+JWT authentication
      │
      ▼
-Current User
+Resolve current user
      │
      ▼
-Role / Permission Check
+Role / permission check
      │
-     ├── Student → own learner resources
+     ├── Student → permitted learner resources
      │
-     └── Admin  → management resources
+     └── Admin   → permitted management resources
      │
      ▼
-Business Logic
+Validation + business logic
+     │
+     ▼
+SQLAlchemy ORM
      │
      ▼
 PostgreSQL
 ```
 
-Security-oriented capabilities include:
-
-- Password hashing
-- JWT-based authentication
-- Protected API routes
-- Role-aware authorization
-- Pydantic validation
-- Backend-side permission checks
-- Separation of public and administrative operations
+Security-oriented capabilities include password hashing, JWT-based authentication, protected API routes, role-aware authorization, Pydantic validation, backend-side permission checks, and separation of public and administrative operations.
 
 ---
 
-# 📈 Product Workflow
+## 📈 Product workflow
 
 ```text
                          ┌───────────────┐
@@ -606,35 +497,38 @@ Security-oriented capabilities include:
 
 ---
 
-# ✅ Feature Matrix
+## ✅ Feature matrix
 
 | Module | Status |
 |---|:---:|
-| Public Website | ✅ |
+| Public website | ✅ |
 | Responsive UI | ✅ |
-| Light / Dark Theme | ✅ |
+| Light / dark theme | ✅ |
 | Authentication | ✅ |
-| JWT Protected APIs | ✅ |
-| RBAC | ✅ |
-| Course Management | ✅ |
-| Enrollment Workflow | ✅ |
-| Batch Management | ✅ |
-| Student Management | ✅ |
-| Contact Management | ✅ |
-| Student Dashboard | ✅ |
-| Admin Dashboard | ✅ |
-| Analytics Dashboard | ✅ |
-| PostgreSQL Persistence | ✅ |
+| JWT-protected APIs | ✅ |
+| Role-based access control | ✅ |
+| Course management | ✅ |
+| Enrollment workflow | ✅ |
+| Batch management | ✅ |
+| Student management | ✅ |
+| Contact management | ✅ |
+| Student dashboard | ✅ |
+| Admin dashboard | ✅ |
+| Analytics dashboard | ✅ |
+| PostgreSQL persistence | ✅ |
 | Swagger / OpenAPI | ✅ |
-| Website Content Management | ✅ |
-| Docker-ready Setup | ✅ |
+| Website content management | ✅ |
+| Docker-ready setup | ✅ |
 
 ---
 
-# 📁 Repository Showcase Assets
+## 📁 Repository showcase assets
+
+The repository includes visual assets used throughout this README:
 
 ```text
 .
+├── Lumiere_French_Academy_Architecture_Final.png
 ├── Landing_Page_Dark.png
 ├── Landing_Page_White.png
 ├── Courses_Page.png
@@ -643,10 +537,8 @@ Security-oriented capabilities include:
 ├── Testimonals_Page.png
 ├── FAQs_Page.png
 ├── Contact_Page.png
-│
 ├── Student_Dashboard.png
 ├── Student_MyBatch.png
-│
 ├── Admin_Dashboard.png
 ├── Admin_Enrollments.png
 ├── Admin_CourseManagement.png
@@ -654,7 +546,6 @@ Security-oriented capabilities include:
 ├── Admin_CreateBatch.png
 ├── Admin_Analytics.png
 ├── Admin_Contact.png
-│
 ├── PostgreSQL_Db.png
 ├── api.png
 ├── register.png
@@ -664,7 +555,7 @@ Security-oriented capabilities include:
 
 ---
 
-# 🎯 Engineering Philosophy
+## 🎯 Engineering philosophy
 
 > **Keep the learner experience elegant while keeping the operational system structured.**
 
@@ -679,11 +570,9 @@ The project emphasizes:
 - 📈 Analytics-ready data
 - 🚀 Production-oriented engineering
 
----
+## 🔮 Future enhancements
 
-# 🔮 Future Enhancements
-
-Natural next steps for the platform include:
+Potential next steps for the platform include:
 
 - 💳 Online payment gateway integration
 - 📧 Automated email / WhatsApp notifications
@@ -699,11 +588,9 @@ Natural next steps for the platform include:
 
 ---
 
-# 🔒 Repository Note
+## 🔒 Repository note
 
-This repository is maintained as a **public portfolio and product showcase**.
-
-The README documents the product architecture, API surface, workflows, data model and visual implementation. Application implementation details that are not intended for public distribution are intentionally not reproduced here.
+This repository is maintained as a **public portfolio and product showcase**. The README documents the product architecture, API surface, workflows, data model, and visual implementation. Application implementation details that are not intended for public distribution are intentionally not reproduced here.
 
 ---
 
